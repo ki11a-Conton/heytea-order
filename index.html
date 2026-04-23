@@ -2768,8 +2768,8 @@
       initMemberPage();
     }
 
-    if (page === 'checkout') {
-      // Hide cart bar and cart drawer on checkout page
+    if (page === 'checkout' || page === 'member') {
+      // Hide cart bar and cart drawer on checkout/member page
       document.getElementById('cartBar').style.display = 'none';
       document.getElementById('cartDrawer').style.display = 'none';
       document.getElementById('cartDrawerOverlay').style.display = 'none';
