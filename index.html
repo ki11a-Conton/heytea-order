@@ -2758,6 +2758,9 @@
     document.getElementById(`page-${page}`).classList.add('active');
     currentPage = page;
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Also scroll app-shell to top (for desktop phone simulator)
+    const shell = document.getElementById('main-content');
+    if (shell) shell.scrollTop = 0;
 
     if (page === 'order') {
       renderCategoryNav();
