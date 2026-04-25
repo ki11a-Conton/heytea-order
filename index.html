@@ -2382,100 +2382,6 @@
     </div>
   </div>
 
-</div>
-
-<!-- ==================== CART BAR ==================== -->
-<div class="cart-bar" id="cartBar">
-  <button class="cart-icon-wrap" id="cartIconWrap" onclick="toggleCartDrawer()" aria-label="购物车">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-    <span class="badge hidden" id="cartBadge">0</span>
-  </button>
-  <button class="cart-info" onclick="toggleCartDrawer()" aria-label="查看购物车详情">
-    <div class="total-price">
-      <span class="yen">&yen;</span><span id="cartTotalPrice">0</span>
-    </div>
-    <div class="delivery-tip">另需配送费 &yen;5</div>
-  </button>
-  <button class="checkout-btn" id="checkoutBtn" disabled onclick="handleCheckout()">去结算</button>
-</div>
-
-<!-- ==================== CART DRAWER ==================== -->
-<button class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="toggleCartDrawer()" type="button" aria-label="关闭购物车"></button>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-drawer-header">
-    <h3>购物车</h3>
-    <button class="clear-btn" onclick="clearCart()">清空</button>
-  </div>
-  <div class="cart-drawer-list" id="cartDrawerList">
-    <!-- JS renders -->
-  </div>
-</div>
-
-<!-- ==================== PRODUCT DETAIL MODAL ==================== -->
-<div class="modal-overlay" id="productModal">
-  <div class="modal-sheet" id="modalSheet">
-    <div class="modal-handle"></div>
-    <img class="modal-product-img" id="modalImg" src="" alt="">
-    <div class="modal-body">
-      <h3 class="modal-product-name" id="modalName"></h3>
-      <p class="modal-product-desc" id="modalDesc"></p>
-      <div class="modal-price">
-        <span class="yen">&yen;</span><span id="modalPrice">0</span>
-      </div>
-
-      <!-- Spec: Size -->
-      <div class="spec-group">
-        <div class="spec-group-title">规格</div>
-        <div class="spec-options" id="specSize">
-          <button class="spec-option active" data-value="中杯" onclick="selectSpec(this, 'size')">中杯</button>
-          <button class="spec-option" data-value="大杯" data-extra="2" onclick="selectSpec(this, 'size')">大杯 +2</button>
-        </div>
-      </div>
-
-      <!-- Spec: Sugar -->
-      <div class="spec-group">
-        <div class="spec-group-title">糖度</div>
-        <div class="spec-options" id="specSugar">
-          <button class="spec-option" data-value="无糖" onclick="selectSpec(this, 'sugar')">无糖</button>
-          <button class="spec-option" data-value="三分糖" onclick="selectSpec(this, 'sugar')">三分糖</button>
-          <button class="spec-option active" data-value="五分糖" onclick="selectSpec(this, 'sugar')">五分糖</button>
-          <button class="spec-option" data-value="七分糖" onclick="selectSpec(this, 'sugar')">七分糖</button>
-          <button class="spec-option" data-value="标准糖" onclick="selectSpec(this, 'sugar')">标准糖</button>
-        </div>
-      </div>
-
-      <!-- Spec: Ice -->
-      <div class="spec-group">
-        <div class="spec-group-title">冰度</div>
-        <div class="spec-options" id="specIce">
-          <button class="spec-option" data-value="去冰" onclick="selectSpec(this, 'ice')">去冰</button>
-          <button class="spec-option" data-value="少冰" onclick="selectSpec(this, 'ice')">少冰</button>
-          <button class="spec-option active" data-value="正常冰" onclick="selectSpec(this, 'ice')">正常冰</button>
-          <button class="spec-option" data-value="多冰" onclick="selectSpec(this, 'ice')">多冰</button>
-        </div>
-      </div>
-
-      <!-- Spec: Toppings -->
-      <div class="spec-group">
-        <div class="spec-group-title">加料</div>
-        <div class="spec-options" id="specToppings">
-          <button class="spec-option" data-value="珍珠" data-extra="3" onclick="toggleTopping(this)">珍珠 +3</button>
-          <button class="spec-option" data-value="椰果" data-extra="3" onclick="toggleTopping(this)">椰果 +3</button>
-          <button class="spec-option" data-value="芝士奶盖" data-extra="5" onclick="toggleTopping(this)">芝士奶盖 +5</button>
-          <button class="spec-option" data-value="芋圆" data-extra="4" onclick="toggleTopping(this)">芋圆 +4</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal-footer">
-      <div class="modal-total">
-        <span class="yen">&yen;</span><span id="modalTotalPrice">0</span>
-      </div>
-      <button class="add-to-cart-btn" onclick="addToCartFromModal()">加入购物车</button>
-    </div>
-  </div>
-</div>
-
   <!-- ==================== MEMBER PAGE ==================== -->
   <div class="page" id="page-member">
     <div class="page-content">
@@ -2699,6 +2605,100 @@
     <div class="success-desc" id="successDesc">预计15分钟内制作完成</div>
     <button class="success-back-btn" onclick="handleBackToHome()" type="button">返回首页</button>
   </div>
+
+</div><!-- end app-shell -->
+
+<!-- ==================== CART BAR ==================== -->
+<div class="cart-bar" id="cartBar">
+  <button class="cart-icon-wrap" id="cartIconWrap" onclick="toggleCartDrawer()" aria-label="购物车">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span class="badge hidden" id="cartBadge">0</span>
+  </button>
+  <button class="cart-info" onclick="toggleCartDrawer()" aria-label="查看购物车详情">
+    <div class="total-price">
+      <span class="yen">&yen;</span><span id="cartTotalPrice">0</span>
+    </div>
+    <div class="delivery-tip">另需配送费 &yen;5</div>
+  </button>
+  <button class="checkout-btn" id="checkoutBtn" disabled onclick="handleCheckout()">去结算</button>
+</div>
+
+<!-- ==================== CART DRAWER ==================== -->
+<button class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="toggleCartDrawer()" type="button" aria-label="关闭购物车"></button>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>购物车</h3>
+    <button class="clear-btn" onclick="clearCart()">清空</button>
+  </div>
+  <div class="cart-drawer-list" id="cartDrawerList">
+    <!-- JS renders -->
+  </div>
+</div>
+
+<!-- ==================== PRODUCT DETAIL MODAL ==================== -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-sheet" id="modalSheet">
+    <div class="modal-handle"></div>
+    <img class="modal-product-img" id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <h3 class="modal-product-name" id="modalName"></h3>
+      <p class="modal-product-desc" id="modalDesc"></p>
+      <div class="modal-price">
+        <span class="yen">&yen;</span><span id="modalPrice">0</span>
+      </div>
+
+      <!-- Spec: Size -->
+      <div class="spec-group">
+        <div class="spec-group-title">规格</div>
+        <div class="spec-options" id="specSize">
+          <button class="spec-option active" data-value="中杯" onclick="selectSpec(this, 'size')">中杯</button>
+          <button class="spec-option" data-value="大杯" data-extra="2" onclick="selectSpec(this, 'size')">大杯 +2</button>
+        </div>
+      </div>
+
+      <!-- Spec: Sugar -->
+      <div class="spec-group">
+        <div class="spec-group-title">糖度</div>
+        <div class="spec-options" id="specSugar">
+          <button class="spec-option" data-value="无糖" onclick="selectSpec(this, 'sugar')">无糖</button>
+          <button class="spec-option" data-value="三分糖" onclick="selectSpec(this, 'sugar')">三分糖</button>
+          <button class="spec-option active" data-value="五分糖" onclick="selectSpec(this, 'sugar')">五分糖</button>
+          <button class="spec-option" data-value="七分糖" onclick="selectSpec(this, 'sugar')">七分糖</button>
+          <button class="spec-option" data-value="标准糖" onclick="selectSpec(this, 'sugar')">标准糖</button>
+        </div>
+      </div>
+
+      <!-- Spec: Ice -->
+      <div class="spec-group">
+        <div class="spec-group-title">冰度</div>
+        <div class="spec-options" id="specIce">
+          <button class="spec-option" data-value="去冰" onclick="selectSpec(this, 'ice')">去冰</button>
+          <button class="spec-option" data-value="少冰" onclick="selectSpec(this, 'ice')">少冰</button>
+          <button class="spec-option active" data-value="正常冰" onclick="selectSpec(this, 'ice')">正常冰</button>
+          <button class="spec-option" data-value="多冰" onclick="selectSpec(this, 'ice')">多冰</button>
+        </div>
+      </div>
+
+      <!-- Spec: Toppings -->
+      <div class="spec-group">
+        <div class="spec-group-title">加料</div>
+        <div class="spec-options" id="specToppings">
+          <button class="spec-option" data-value="珍珠" data-extra="3" onclick="toggleTopping(this)">珍珠 +3</button>
+          <button class="spec-option" data-value="椰果" data-extra="3" onclick="toggleTopping(this)">椰果 +3</button>
+          <button class="spec-option" data-value="芝士奶盖" data-extra="5" onclick="toggleTopping(this)">芝士奶盖 +5</button>
+          <button class="spec-option" data-value="芋圆" data-extra="4" onclick="toggleTopping(this)">芋圆 +4</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <div class="modal-total">
+        <span class="yen">&yen;</span><span id="modalTotalPrice">0</span>
+      </div>
+      <button class="add-to-cart-btn" onclick="addToCartFromModal()">加入购物车</button>
+    </div>
+  </div>
+</div>
 
 <!-- ==================== TOAST ==================== -->
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
