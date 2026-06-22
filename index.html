@@ -1687,6 +1687,532 @@
     }
 
     /* ========================================
+       RIPPLE EFFECT
+       ======================================== */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: rippleAnim 0.6s ease-out;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* ========================================
+       SKELETON LOADING
+       ======================================== */
+    .skeleton {
+      background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+      background-size: 200% 100%;
+      animation: skeletonShimmer 1.5s infinite;
+      border-radius: 8px;
+    }
+    @keyframes skeletonShimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-product {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+    }
+    .skeleton-product .sk-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .skeleton-product .sk-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
+    }
+    .skeleton-product .sk-line {
+      height: 14px;
+      border-radius: 4px;
+    }
+    .skeleton-product .sk-line.w60 { width: 60%; }
+    .skeleton-product .sk-line.w40 { width: 40%; }
+    .skeleton-product .sk-line.w80 { width: 80%; }
+
+    /* ========================================
+       SEARCH BAR
+       ======================================== */
+    .search-bar {
+      padding: var(--space-sm) var(--space-lg) var(--space-md);
+      background: var(--white);
+      position: sticky;
+      top: 56px;
+      z-index: 10;
+    }
+    .search-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input-wrap svg {
+      position: absolute;
+      left: 14px;
+      width: 18px;
+      height: 18px;
+      color: var(--gray-400);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 14px 10px 40px;
+      border: none;
+      border-radius: 20px;
+      background: var(--gray-100);
+      font-size: 14px;
+      font-family: var(--font-primary);
+      color: var(--text-primary);
+      outline: none;
+      transition: background 0.2s ease;
+    }
+    .search-input::placeholder { color: var(--gray-400); }
+    .search-input:focus { background: var(--gray-200); }
+    .search-clear {
+      position: absolute;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      border: none;
+      border-radius: 50%;
+      background: var(--gray-300);
+      color: var(--white);
+      font-size: 14px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .search-clear.show { display: flex; }
+    .search-results-info {
+      padding: var(--space-xs) var(--space-lg);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .search-empty {
+      text-align: center;
+      padding: var(--space-3xl) var(--space-lg);
+      color: var(--text-tertiary);
+    }
+    .search-empty svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: var(--space-md);
+      opacity: 0.3;
+    }
+
+    /* ========================================
+       EMPTY CART STATE
+       ======================================== */
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-3xl) var(--space-lg);
+      text-align: center;
+    }
+    .cart-empty svg {
+      width: 64px;
+      height: 64px;
+      color: var(--gray-300);
+      margin-bottom: var(--space-md);
+    }
+    .cart-empty-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xs);
+    }
+    .cart-empty-desc {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      margin-bottom: var(--space-lg);
+    }
+    .cart-empty-btn {
+      background: var(--heytea-green);
+      color: var(--white);
+      border: none;
+      border-radius: 20px;
+      padding: 10px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background 0.2s ease;
+    }
+    .cart-empty-btn:hover { background: var(--heytea-green-dark); }
+
+    /* ========================================
+       BOTTOM TAB BAR
+       ======================================== */
+    .tab-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+      border-top: 1px solid var(--border-color);
+      z-index: 90;
+      transition: transform 0.3s ease;
+    }
+    .tab-bar.hidden { transform: translateX(-50%) translateY(100%); }
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      background: none;
+      border: none;
+      padding: 4px 16px;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: opacity 0.2s ease;
+    }
+    .tab-item svg {
+      width: 24px;
+      height: 24px;
+      color: var(--gray-400);
+      transition: color 0.2s ease;
+    }
+    .tab-item .tab-label {
+      font-size: 10px;
+      color: var(--gray-400);
+      transition: color 0.2s ease;
+    }
+    .tab-item.active svg { color: var(--heytea-green); }
+    .tab-item.active .tab-label { color: var(--heytea-green); font-weight: 600; }
+    .tab-item:active { opacity: 0.7; }
+
+    /* ========================================
+       ORDER TRACKING PAGE
+       ======================================== */
+    .tracking-section {
+      padding: var(--space-lg);
+    }
+    .tracking-section + .tracking-section {
+      border-top: 8px solid var(--bg-secondary);
+    }
+    .tracking-order-id {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xs);
+    }
+    .tracking-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--heytea-green-light);
+      color: var(--heytea-green);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: var(--space-lg);
+    }
+    .tracking-status-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--heytea-green);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* Progress Timeline */
+    .tracking-timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .tracking-timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 12px;
+      bottom: 12px;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .tracking-step {
+      position: relative;
+      padding-bottom: var(--space-xl);
+    }
+    .tracking-step:last-child { padding-bottom: 0; }
+    .tracking-step::before {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      border: 3px solid var(--white);
+      box-shadow: 0 0 0 1px var(--gray-200);
+      transition: all 0.3s ease;
+    }
+    .tracking-step.done::before {
+      background: var(--heytea-green);
+      box-shadow: 0 0 0 1px var(--heytea-green);
+    }
+    .tracking-step.current::before {
+      background: var(--heytea-green);
+      box-shadow: 0 0 0 1px var(--heytea-green), 0 0 0 6px rgba(var(--heytea-green-rgb), 0.15);
+      animation: pulse 1.5s infinite;
+    }
+    .tracking-step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .tracking-step.pending .tracking-step-title { color: var(--gray-400); }
+    .tracking-step-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .tracking-step.pending .tracking-step-desc { color: var(--gray-400); }
+    .tracking-step-time {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+      font-family: var(--font-number);
+    }
+
+    /* Progress Bar */
+    .tracking-progress-bar {
+      height: 6px;
+      background: var(--gray-200);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: var(--space-md);
+    }
+    .tracking-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--heytea-green), var(--heytea-green-dark));
+      border-radius: 3px;
+      transition: width 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    /* Tracking Items */
+    .tracking-items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .tracking-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .tracking-item-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .tracking-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .tracking-item-info { flex: 1; min-width: 0; }
+    .tracking-item-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .tracking-item-spec {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .tracking-item-qty {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Pickup Code */
+    .pickup-code-card {
+      background: linear-gradient(135deg, var(--heytea-green) 0%, var(--heytea-green-dark) 100%);
+      border-radius: 16px;
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+      color: var(--white);
+      margin-bottom: var(--space-lg);
+    }
+    .pickup-code-label {
+      font-size: 13px;
+      opacity: 0.8;
+      margin-bottom: var(--space-xs);
+    }
+    .pickup-code-number {
+      font-size: 36px;
+      font-weight: 700;
+      font-family: var(--font-number);
+      letter-spacing: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+    .pickup-code-tip {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: var(--space-xs);
+    }
+
+    /* Tracking Actions */
+    .tracking-actions {
+      display: flex;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .tracking-action-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all 0.2s ease;
+      border: none;
+    }
+    .tracking-action-btn.primary {
+      background: var(--heytea-green);
+      color: var(--white);
+    }
+    .tracking-action-btn.primary:hover { background: var(--heytea-green-dark); }
+    .tracking-action-btn.secondary {
+      background: var(--gray-100);
+      color: var(--text-primary);
+    }
+    .tracking-action-btn.secondary:hover { background: var(--gray-200); }
+
+    /* ========================================
+       ORDER HISTORY (Member Page)
+       ======================================== */
+    .order-history-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .order-history-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: var(--space-md);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .order-history-card:active {
+      transform: scale(0.98);
+    }
+    .order-history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+    .order-history-store {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .order-history-status {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 10px;
+    }
+    .order-history-status.done {
+      background: var(--gray-100);
+      color: var(--text-secondary);
+    }
+    .order-history-status.tracking {
+      background: var(--heytea-green-light);
+      color: var(--heytea-green);
+    }
+    .order-history-items {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+    .order-history-imgs {
+      display: flex;
+      flex-shrink: 0;
+    }
+    .order-history-imgs img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-left: -8px;
+      border: 2px solid var(--white);
+    }
+    .order-history-imgs img:first-child { margin-left: 0; }
+    .order-history-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      flex: 1;
+    }
+    .order-history-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--border-color);
+    }
+    .order-history-price {
+      font-family: var(--font-number);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .order-history-reorder {
+      font-size: 13px;
+      color: var(--heytea-green);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .order-history-empty {
+      text-align: center;
+      padding: var(--space-2xl) 0;
+      color: var(--text-tertiary);
+      font-size: 14px;
+    }
+
+    /* ========================================
+       PAGE TRANSITION
+       ======================================== */
+    .page {
+      animation: pageEnter 0.3s ease;
+    }
+    @keyframes pageEnter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================
        Skip Link
        ======================================== */
     .skip-link {
@@ -2370,6 +2896,15 @@
         <h1 class="title">点单</h1>
       </nav>
 
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" id="searchInput" placeholder="搜索茶饮名称..." oninput="handleSearch(this.value)">
+          <button class="search-clear" id="searchClear" onclick="clearSearch()" aria-label="清除">×</button>
+        </div>
+      </div>
+
       <!-- Category Nav -->
       <div class="category-nav" id="categoryNav">
         <!-- JS renders -->
@@ -2507,6 +3042,14 @@
         </div>
       </div>
 
+      <!-- Order History -->
+      <div class="member-section animate-fade-in-up" style="margin-top: var(--space-lg);">
+        <h2 class="member-section-title">历史订单</h2>
+        <div class="order-history-list" id="orderHistoryContainer">
+          <!-- JS renders -->
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -2596,6 +3139,65 @@
     </div>
   </div>
 
+  <!-- ==================== ORDER TRACKING PAGE ==================== -->
+  <div class="page" id="page-tracking">
+    <div class="page-content">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <button class="back-btn" onclick="navigateTo('home')" aria-label="返回">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <h1 class="title">订单追踪</h1>
+      </nav>
+
+      <!-- Status -->
+      <div class="tracking-section">
+        <div class="tracking-order-id" id="trackingOrderId">订单号：--</div>
+        <div class="tracking-status-badge" id="trackingStatusBadge">
+          <span class="dot"></span>
+          <span id="trackingStatusText">制作中</span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="tracking-progress-bar">
+          <div class="tracking-progress-fill" id="trackingProgressFill" style="width: 0%"></div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="tracking-timeline" id="trackingTimeline">
+          <!-- JS renders -->
+        </div>
+      </div>
+
+      <!-- Pickup Code -->
+      <div class="tracking-section">
+        <div class="pickup-code-card">
+          <div class="pickup-code-label">取餐码</div>
+          <div class="pickup-code-number" id="pickupCode">---</div>
+          <div class="pickup-code-tip">请到店出示取餐码</div>
+        </div>
+      </div>
+
+      <!-- Order Items -->
+      <div class="tracking-section">
+        <div class="checkout-section-title">商品明细</div>
+        <div class="tracking-items" id="trackingItems">
+          <!-- JS renders -->
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="tracking-section">
+        <div class="tracking-actions">
+          <button class="tracking-action-btn secondary" onclick="navigateTo('home')" type="button">返回首页</button>
+          <button class="tracking-action-btn primary" onclick="navigateTo('order')" type="button">再来一单</button>
+        </div>
+      </div>
+
+      <div style="height: 80px;"></div>
+    </div>
+  </div>
+
   <!-- ==================== SUCCESS OVERLAY ==================== -->
   <div class="success-overlay" id="successOverlay">
     <div class="success-icon">
@@ -2603,10 +3205,30 @@
     </div>
     <div class="success-title">下单成功</div>
     <div class="success-desc" id="successDesc">预计15分钟内制作完成</div>
-    <button class="success-back-btn" onclick="handleBackToHome()" type="button">返回首页</button>
+    <button class="success-back-btn" onclick="handlePaySuccess()" type="button">查看订单</button>
   </div>
 
 </div><!-- end app-shell -->
+
+<!-- ==================== BOTTOM TAB BAR ==================== -->
+<nav class="tab-bar" id="tabBar">
+  <button class="tab-item active" data-page="home" onclick="navigateTo('home')" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span class="tab-label">首页</span>
+  </button>
+  <button class="tab-item" data-page="order" onclick="navigateTo('order')" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="tab-label">点单</span>
+  </button>
+  <button class="tab-item" data-page="tracking" onclick="navigateTo('tracking')" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    <span class="tab-label">订单</span>
+  </button>
+  <button class="tab-item" data-page="member" onclick="navigateTo('member')" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span class="tab-label">我的</span>
+  </button>
+</nav>
 
 <!-- ==================== CART BAR ==================== -->
 <div class="cart-bar" id="cartBar">
@@ -2749,6 +3371,7 @@
   let selectedSpecs = { size: '中杯', sugar: '五分糖', ice: '正常冰', toppings: [] };
   let bannerIndex = 0;
   let bannerTimer = null;
+  let orderHistory = [];
 
   // ========================================
   // NAVIGATION
@@ -2758,27 +3381,42 @@
     document.getElementById(`page-${page}`).classList.add('active');
     currentPage = page;
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Also scroll app-shell to top (for desktop phone simulator)
     const shell = document.getElementById('main-content');
     if (shell) shell.scrollTop = 0;
 
+    // Update tab bar
+    const tabBar = document.getElementById('tabBar');
+    document.querySelectorAll('.tab-item').forEach(t => {
+      t.classList.toggle('active', t.dataset.page === page);
+    });
+
     if (page === 'order') {
-      renderCategoryNav();
-      renderProductGrid();
-    }
-
-    if (page === 'member') {
+      showSkeleton();
+      setTimeout(() => {
+        renderCategoryNav();
+        renderProductGrid();
+      }, 400);
+      tabBar.classList.remove('hidden');
+    } else if (page === 'home') {
+      tabBar.classList.remove('hidden');
+    } else if (page === 'member') {
       initMemberPage();
+      renderOrderHistory();
+      tabBar.classList.remove('hidden');
+    } else if (page === 'tracking') {
+      tabBar.classList.remove('hidden');
+    } else {
+      // checkout - hide tab bar
+      tabBar.classList.add('hidden');
     }
 
-    if (page === 'checkout' || page === 'member') {
-      // Hide cart bar and cart drawer on checkout/member page
+    // Cart bar visibility
+    if (page === 'checkout' || page === 'member' || page === 'tracking') {
       document.getElementById('cartBar').style.display = 'none';
       document.getElementById('cartDrawer').style.display = 'none';
       document.getElementById('cartDrawerOverlay').style.display = 'none';
     } else {
       document.getElementById('cartBar').style.display = '';
-      // Restore cart drawer visibility (but keep it closed)
       document.getElementById('cartDrawer').style.display = '';
       document.getElementById('cartDrawerOverlay').style.display = '';
     }
@@ -3166,7 +3804,14 @@
     const list = document.getElementById('cartDrawerList');
 
     if (cart.length === 0) {
-      list.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--text-tertiary);font-size:14px;">购物车是空的</div>';
+      list.innerHTML = `
+        <div class="cart-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <div class="cart-empty-title">购物车是空的</div>
+          <div class="cart-empty-desc">快去挑选你喜欢的茶饮吧</div>
+          <button class="cart-empty-btn" onclick="toggleCartDrawer(); navigateTo('order');" type="button">去点单</button>
+        </div>
+      `;
       return;
     }
 
@@ -3307,17 +3952,30 @@
 
   function handlePay() {
     const btn = document.getElementById('payBtn');
+    const savedPrice = document.getElementById('payTotalPrice').textContent;
     btn.disabled = true;
     btn.textContent = '支付中…';
 
-    // Simulate payment delay
     setTimeout(() => {
       btn.disabled = false;
-      btn.innerHTML = '<span class="yen" style="font-size:14px;font-weight:600;">&yen;</span><span id="payTotalPrice">' + document.getElementById('payTotalPrice').textContent + '</span> · 立即支付';
+      btn.innerHTML = '<span class="yen" style="font-size:14px;font-weight:600;">&yen;</span><span id="payTotalPrice">' + savedPrice + '</span> · 立即支付';
 
       const totalQty = cart.reduce((sum, c) => sum + c.qty, 0);
       const totalPrice = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
       const total = totalPrice + 5 + cart.length * 1;
+
+      // Save order
+      const order = {
+        id: 'HEYTEA' + Date.now().toString().slice(-8),
+        items: cart.map(c => ({ ...c })),
+        total: total,
+        qty: totalQty,
+        store: '喜茶（万象城店）',
+        pickupCode: Math.floor(1000 + Math.random() * 9000),
+        createdAt: Date.now(),
+        status: 0 // 0:已下单 1:制作中 2:待取餐 3:已完成
+      };
+      orderHistory.unshift(order);
 
       document.getElementById('successDesc').textContent = `共 ${totalQty} 杯 · ¥${total} · 预计15分钟内制作完成`;
       document.getElementById('successOverlay').classList.add('show');
@@ -3328,9 +3986,239 @@
     }, 1500);
   }
 
-  function handleBackToHome() {
+  function handlePaySuccess() {
     document.getElementById('successOverlay').classList.remove('show');
-    navigateTo('home');
+    renderTrackingPage(orderHistory[0]);
+    navigateTo('tracking');
+  }
+
+  // ========================================
+  // ORDER TRACKING
+  // ========================================
+  let trackingTimer = null;
+  const TRACKING_STEPS = [
+    { title: '订单已提交', desc: '您的订单已成功提交', icon: '📝' },
+    { title: '制作中', desc: '茶饮师正在精心制作', icon: '🍵' },
+    { title: '待取餐', desc: '您的茶饮已完成，请到店取餐', icon: '✅' },
+    { title: '已完成', desc: '感谢您的惠顾，欢迎再次光临', icon: '🎉' }
+  ];
+
+  function renderTrackingPage(order) {
+    if (!order) {
+      // No active order - show empty state
+      document.getElementById('trackingOrderId').textContent = '暂无进行中的订单';
+      document.getElementById('trackingStatusText').textContent = '无订单';
+      document.getElementById('trackingProgressFill').style.width = '0%';
+      document.getElementById('pickupCode').textContent = '---';
+      document.getElementById('trackingTimeline').innerHTML = '<div class="search-empty"><p>暂无进行中的订单</p></div>';
+      document.getElementById('trackingItems').innerHTML = '';
+      return;
+    }
+
+    document.getElementById('trackingOrderId').textContent = `订单号：${order.id}`;
+    document.getElementById('pickupCode').textContent = order.pickupCode;
+
+    const statusTexts = ['已下单', '制作中', '待取餐', '已完成'];
+    document.getElementById('trackingStatusText').textContent = statusTexts[order.status];
+
+    // Progress bar
+    const progress = ((order.status + 1) / 4) * 100;
+    document.getElementById('trackingProgressFill').style.width = progress + '%';
+
+    // Timeline
+    const timeline = document.getElementById('trackingTimeline');
+    timeline.innerHTML = TRACKING_STEPS.map((step, i) => {
+      let cls = '';
+      if (i < order.status) cls = 'done';
+      else if (i === order.status) cls = 'current';
+      else cls = 'pending';
+      return `
+        <div class="tracking-step ${cls}">
+          <div class="tracking-step-title">${step.title}</div>
+          <div class="tracking-step-desc">${step.desc}</div>
+          ${i <= order.status ? `<div class="tracking-step-time">${formatTime(order.createdAt + i * 60000)}</div>` : ''}
+        </div>
+      `;
+    }).join('');
+
+    // Items
+    document.getElementById('trackingItems').innerHTML = order.items.map(item => `
+      <div class="tracking-item">
+        <div class="tracking-item-img">
+          <img src="${item.img}" alt="${item.name}" width="48" height="48" loading="lazy">
+        </div>
+        <div class="tracking-item-info">
+          <div class="tracking-item-name">${item.name}</div>
+          <div class="tracking-item-spec">${item.spec}</div>
+        </div>
+        <div class="tracking-item-qty">x${item.qty}</div>
+      </div>
+    `).join('');
+
+    // Auto-advance tracking
+    if (trackingTimer) clearInterval(trackingTimer);
+    if (order.status < 3) {
+      trackingTimer = setInterval(() => {
+        order.status++;
+        if (order.status <= 3) {
+          renderTrackingPage(order);
+        }
+        if (order.status >= 3) {
+          clearInterval(trackingTimer);
+          trackingTimer = null;
+        }
+      }, 8000); // Advance every 8 seconds for demo
+    }
+  }
+
+  function formatTime(timestamp) {
+    const d = new Date(timestamp);
+    return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+
+  // ========================================
+  // ORDER HISTORY
+  // ========================================
+  function renderOrderHistory() {
+    const container = document.getElementById('orderHistoryContainer');
+    if (!container) return;
+
+    if (orderHistory.length === 0) {
+      container.innerHTML = '<div class="order-history-empty">暂无历史订单</div>';
+      return;
+    }
+
+    container.innerHTML = orderHistory.map(order => {
+      const statusTexts = ['已下单', '制作中', '待取餐', '已完成'];
+      const statusCls = order.status < 3 ? 'tracking' : 'done';
+      const imgs = order.items.slice(0, 3).map(item =>
+        `<img src="${item.img}" alt="${item.name}" width="40" height="40" loading="lazy">`
+      ).join('');
+      const itemNames = order.items.map(i => i.name).join('、');
+      return `
+        <div class="order-history-card" onclick="viewOrder('${order.id}')">
+          <div class="order-history-header">
+            <span class="order-history-store">${order.store}</span>
+            <span class="order-history-status ${statusCls}">${statusTexts[order.status]}</span>
+          </div>
+          <div class="order-history-items">
+            <div class="order-history-imgs">${imgs}</div>
+            <div class="order-history-desc">${itemNames} 等${order.qty}件</div>
+          </div>
+          <div class="order-history-footer">
+            <span class="order-history-price"><span class="yen" style="font-size:12px;">&yen;</span>${order.total}</span>
+            <span class="order-history-reorder">查看详情 ></span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function viewOrder(orderId) {
+    const order = orderHistory.find(o => o.id === orderId);
+    if (order) {
+      renderTrackingPage(order);
+      navigateTo('tracking');
+    }
+  }
+
+  // ========================================
+  // SEARCH
+  // ========================================
+  let searchQuery = '';
+
+  function handleSearch(value) {
+    searchQuery = value.trim().toLowerCase();
+    const clearBtn = document.getElementById('searchClear');
+    clearBtn.classList.toggle('show', searchQuery.length > 0);
+
+    const grid = document.getElementById('productGrid');
+    const nav = document.getElementById('categoryNav');
+
+    if (searchQuery === '') {
+      nav.style.display = '';
+      renderProductGrid();
+      return;
+    }
+
+    nav.style.display = 'none';
+
+    // Filter products
+    const filtered = PRODUCTS.filter(p =>
+      p.name.toLowerCase().includes(searchQuery) ||
+      (p.desc && p.desc.toLowerCase().includes(searchQuery))
+    );
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div class="search-empty">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p>未找到"${value}"相关商品</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = `
+      <div class="search-results-info">找到 ${filtered.length} 个相关商品</div>
+    ` + filtered.map(p => `
+      <div class="product-card" role="button" tabindex="0" onclick="openProductModal(${p.id})" onkeydown="if(event.key==='Enter')openProductModal(${p.id})">
+        <div class="image-wrap">
+          <img src="${p.img}" alt="${p.name}" loading="lazy" width="400" height="400">
+          ${p.tags ? `<div class="tags">${p.tags.map(t => `<span class="tag tag-${t}">${t==='new'?'新品':t==='hot'?'人气':t==='limited'?'限定':''}</span>`).join('')}</div>` : ''}
+        </div>
+        <div class="info">
+          <div class="name">${p.name}</div>
+          <div class="desc">${p.desc || ''}</div>
+          <div class="price-row">
+            <div class="price"><span class="yen">¥</span>${p.price}</div>
+            <button class="btn-icon add" onclick="event.stopPropagation(); quickAdd(${p.id}, this)" aria-label="加入购物车">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function clearSearch() {
+    document.getElementById('searchInput').value = '';
+    handleSearch('');
+  }
+
+  // ========================================
+  // RIPPLE EFFECT
+  // ========================================
+  function addRipple(e) {
+    const btn = e.currentTarget;
+    const rect = btn.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = e.clientX - rect.left - size / 2;
+    const y = e.clientY - rect.top - size / 2;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
+  }
+
+  // ========================================
+  // SKELETON LOADING
+  // ========================================
+  function showSkeleton() {
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = Array(4).fill(0).map(() => `
+      <div class="skeleton-product">
+        <div class="skeleton sk-img"></div>
+        <div class="sk-info">
+          <div class="skeleton sk-line w60"></div>
+          <div class="skeleton sk-line w80"></div>
+          <div class="skeleton sk-line w40"></div>
+        </div>
+      </div>
+    `).join('');
   }
 
   // ========================================
@@ -3522,6 +4410,37 @@
     renderNewArrivals();
     initScrollReveal();
     initMemberPage();
+
+    // Ripple effect on all buttons
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('button, .order-type-card, .hot-product-card, .product-card, .tab-item, .payment-method');
+      if (btn) {
+        if (getComputedStyle(btn).position === 'static') {
+          btn.style.position = 'relative';
+        }
+        btn.style.overflow = 'hidden';
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+        btn.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      }
+    }, true);
+
+    // Add bottom padding for tab bar
+    const style = document.createElement('style');
+    style.textContent = `
+      .page-content { padding-bottom: 60px; }
+      #page-checkout .page-content { padding-bottom: 0; }
+      #page-tracking .page-content { padding-bottom: 0; }
+    `;
+    document.head.appendChild(style);
   }
 
   document.addEventListener('DOMContentLoaded', init);
