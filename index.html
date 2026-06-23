@@ -196,12 +196,12 @@
     }
     .page.active {
       display: block;
-      animation: pageFadeIn 0.35s ease forwards;
+      animation: pageFadeIn 0.3s ease forwards;
     }
 
     @keyframes pageFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .page-content {
@@ -972,6 +972,12 @@
     .modal-body {
       padding: var(--space-xl) var(--space-lg) var(--space-3xl);
     }
+    .modal-product-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
     .modal-product-name {
       font-size: 20px;
       font-weight: 700;
@@ -996,6 +1002,28 @@
     .modal-price .yen {
       font-size: 14px;
       font-weight: 600;
+    }
+    .favorite-btn {
+      flex-shrink: 0;
+      width: 40px; height: 40px;
+      border: none;
+      background: var(--bg-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-tertiary);
+      transition: all 0.2s;
+    }
+    .favorite-btn.favorited {
+      color: var(--red);
+    }
+    .favorite-btn.favorited svg {
+      fill: currentColor;
+    }
+    .favorite-btn:active {
+      transform: scale(0.9);
     }
 
     /* Spec Options */
@@ -1343,6 +1371,128 @@
       font-weight: 600;
       color: var(--text-primary);
       margin-bottom: var(--space-md);
+    }
+
+    /* Pickup Methods */
+    .pickup-methods {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .pickup-method {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--white);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pickup-method.active {
+      border-color: var(--heytea-green);
+      background: var(--heytea-green-light);
+      color: var(--heytea-green-dark);
+    }
+    .pickup-method svg { color: inherit; }
+
+    /* Delivery Address */
+    .delivery-address {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--bg-secondary);
+      border-radius: 12px;
+    }
+    .address-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--heytea-green-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .address-icon svg { color: var(--heytea-green); }
+    .address-info { flex: 1; min-width: 0; }
+    .address-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .address-detail { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .address-edit {
+      background: none; border: none;
+      color: var(--heytea-green);
+      font-size: 13px; font-weight: 500;
+      cursor: pointer; flex-shrink: 0;
+    }
+
+    /* Quick Remarks */
+    .quick-remarks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+    .quick-remark-chip {
+      padding: 6px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 100px;
+      background: var(--white);
+      font-size: 13px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quick-remark-chip:active {
+      border-color: var(--heytea-green);
+      background: var(--heytea-green-light);
+      color: var(--heytea-green-dark);
+    }
+
+    /* Promo Code */
+    .promo-input-row {
+      display: flex;
+      gap: var(--space-sm);
+    }
+    .promo-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .promo-input:focus { border-color: var(--heytea-green); }
+    .promo-apply-btn {
+      padding: 10px 20px;
+      background: var(--heytea-green);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .promo-apply-btn:active { background: var(--heytea-green-dark); }
+    .promo-result {
+      margin-top: var(--space-sm);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .promo-result.success {
+      background: var(--heytea-green-light);
+      color: var(--heytea-green-dark);
+    }
+    .promo-result.error {
+      background: #FFF0F0;
+      color: var(--red);
     }
 
     /* Store Info */
@@ -2199,17 +2349,6 @@
       padding: var(--space-2xl) 0;
       color: var(--text-tertiary);
       font-size: 14px;
-    }
-
-    /* ========================================
-       PAGE TRANSITION
-       ======================================== */
-    .page {
-      animation: pageEnter 0.3s ease;
-    }
-    @keyframes pageEnter {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     /* ========================================
@@ -3077,6 +3216,31 @@
         </div>
       </div>
 
+      <!-- Delivery Address -->
+      <div class="checkout-section">
+        <div class="checkout-section-title">取餐方式</div>
+        <div class="pickup-methods">
+          <button class="pickup-method active" data-method="pickup" onclick="selectPickupMethod('pickup')" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>到店自取</span>
+          </button>
+          <button class="pickup-method" data-method="delivery" onclick="selectPickupMethod('delivery')" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <span>外卖配送</span>
+          </button>
+        </div>
+        <div class="delivery-address" id="deliveryAddress" style="display:none;">
+          <div class="address-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="address-info">
+            <div class="address-name">张先生 138****8888</div>
+            <div class="address-detail">杭州市西湖区文三路 478 号 华星时代广场 A 座 3 楼</div>
+          </div>
+          <button class="address-edit" type="button" onclick="showToast('地址编辑功能开发中')">编辑</button>
+        </div>
+      </div>
+
       <!-- Order Items -->
       <div class="checkout-section">
         <div class="checkout-section-title">商品明细</div>
@@ -3088,7 +3252,24 @@
       <!-- Remark -->
       <div class="checkout-section">
         <div class="checkout-section-title">备注</div>
+        <div class="quick-remarks">
+          <button class="quick-remark-chip" onclick="addQuickRemark('少冰')" type="button">少冰</button>
+          <button class="quick-remark-chip" onclick="addQuickRemark('不要吸管')" type="button">不要吸管</button>
+          <button class="quick-remark-chip" onclick="addQuickRemark('不要纸袋')" type="button">不要纸袋</button>
+          <button class="quick-remark-chip" onclick="addQuickRemark('多加冰')" type="button">多加冰</button>
+          <button class="quick-remark-chip" onclick="addQuickRemark('打包带走')" type="button">打包带走</button>
+        </div>
         <textarea class="remark-input" id="checkoutRemark" placeholder="如：少冰、不要吸管…" maxlength="100"></textarea>
+      </div>
+
+      <!-- Promo Code -->
+      <div class="checkout-section">
+        <div class="checkout-section-title">优惠</div>
+        <div class="promo-input-row">
+          <input type="text" class="promo-input" id="promoInput" placeholder="输入优惠码">
+          <button class="promo-apply-btn" onclick="applyPromoCode()" type="button">使用</button>
+        </div>
+        <div class="promo-result" id="promoResult" style="display:none;"></div>
       </div>
 
       <!-- Price Summary -->
@@ -3186,11 +3367,28 @@
         </div>
       </div>
 
+      <!-- Order Total -->
+      <div class="tracking-section">
+        <div class="checkout-section-title">订单信息</div>
+        <div class="price-row">
+          <span>门店</span>
+          <span class="value" id="trackingStore">喜茶（万象城店）</span>
+        </div>
+        <div class="price-row">
+          <span>下单时间</span>
+          <span class="value" id="trackingTime">--</span>
+        </div>
+        <div class="price-row total">
+          <span>订单总额</span>
+          <span class="value" id="trackingTotal">&yen;--</span>
+        </div>
+      </div>
+
       <!-- Actions -->
       <div class="tracking-section">
         <div class="tracking-actions">
           <button class="tracking-action-btn secondary" onclick="navigateTo('home')" type="button">返回首页</button>
-          <button class="tracking-action-btn primary" onclick="navigateTo('order')" type="button">再来一单</button>
+          <button class="tracking-action-btn primary" onclick="reorderFromTracking()" type="button">再来一单</button>
         </div>
       </div>
 
@@ -3263,10 +3461,17 @@
     <div class="modal-handle"></div>
     <img class="modal-product-img" id="modalImg" src="" alt="">
     <div class="modal-body">
-      <h3 class="modal-product-name" id="modalName"></h3>
-      <p class="modal-product-desc" id="modalDesc"></p>
-      <div class="modal-price">
-        <span class="yen">&yen;</span><span id="modalPrice">0</span>
+      <div class="modal-product-header">
+        <div>
+          <h3 class="modal-product-name" id="modalName"></h3>
+          <p class="modal-product-desc" id="modalDesc"></p>
+          <div class="modal-price">
+            <span class="yen">&yen;</span><span id="modalPrice">0</span>
+          </div>
+        </div>
+        <button class="favorite-btn" id="favoriteBtn" onclick="toggleFavorite(selectedProduct ? selectedProduct.id : null, this)" type="button" aria-label="收藏">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
       </div>
 
       <!-- Spec: Size -->
@@ -3372,15 +3577,83 @@
   let bannerIndex = 0;
   let bannerTimer = null;
   let orderHistory = [];
+  let favorites = JSON.parse(localStorage.getItem('heytea_favorites') || '[]');
+
+  // ========================================
+  // LOCALSTORAGE PERSISTENCE
+  // ========================================
+  function saveCart() {
+    localStorage.setItem('heytea_cart', JSON.stringify(cart));
+  }
+
+  function loadCart() {
+    const saved = localStorage.getItem('heytea_cart');
+    if (saved) {
+      try {
+        cart = JSON.parse(saved);
+        cartItemIdCounter = cart.reduce((max, c) => Math.max(max, c.cartItemId || 0), 0);
+      } catch(e) { cart = []; }
+    }
+  }
+
+  function saveOrderHistory() {
+    localStorage.setItem('heytea_orders', JSON.stringify(orderHistory));
+  }
+
+  function loadOrderHistory() {
+    const saved = localStorage.getItem('heytea_orders');
+    if (saved) {
+      try { orderHistory = JSON.parse(saved); } catch(e) { orderHistory = []; }
+    }
+  }
+
+  function saveFavorites() {
+    localStorage.setItem('heytea_favorites', JSON.stringify(favorites));
+  }
+
+  function toggleFavorite(id, btnEl) {
+    const idx = favorites.indexOf(id);
+    if (idx >= 0) {
+      favorites.splice(idx, 1);
+      showToast('已取消收藏');
+    } else {
+      favorites.push(id);
+      showToast('已加入收藏');
+    }
+    saveFavorites();
+    if (btnEl) {
+      const svg = btnEl.querySelector('svg');
+      if (svg) svg.style.fill = favorites.includes(id) ? 'currentColor' : 'none';
+      btnEl.classList.toggle('favorited', favorites.includes(id));
+    }
+  }
 
   // ========================================
   // NAVIGATION
   // ========================================
   function navigateTo(page) {
+    // Clear tracking timer when leaving tracking page
+    if (currentPage === 'tracking' && page !== 'tracking' && trackingTimer) {
+      clearInterval(trackingTimer);
+      trackingTimer = null;
+    }
+
+    // Clear search when leaving order page
+    if (currentPage === 'order' && page !== 'order') {
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) searchInput.value = '';
+      const searchClear = document.getElementById('searchClear');
+      if (searchClear) searchClear.classList.remove('show');
+      const categoryNav = document.getElementById('categoryNav');
+      if (categoryNav) categoryNav.style.display = '';
+      searchQuery = '';
+    }
+
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(`page-${page}`).classList.add('active');
     currentPage = page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Scroll to top — use app-shell on desktop, window on mobile
     const shell = document.getElementById('main-content');
     if (shell) shell.scrollTop = 0;
 
@@ -3404,6 +3677,8 @@
       renderOrderHistory();
       tabBar.classList.remove('hidden');
     } else if (page === 'tracking') {
+      // Render latest order or empty state when accessing via tab bar
+      renderTrackingPage(orderHistory[0] || null);
       tabBar.classList.remove('hidden');
     } else {
       // checkout - hide tab bar
@@ -3531,7 +3806,8 @@
     }
 
     grid.innerHTML = items.map((p, i) => {
-      const cartItem = cart.find(c => c.id === p.id);
+      const defaultSpec = '中杯 / 五分糖 / 正常冰';
+      const cartItem = cart.find(c => c.id === p.id && c.spec === defaultSpec);
       const qty = cartItem ? cartItem.qty : 0;
       const tagsHtml = p.tags.map(t => {
         if (t === 'hot') return '<span class="tag tag-hot">人气</span>';
@@ -3551,13 +3827,13 @@
             <div class="desc">${p.desc}</div>
             <div class="price-row">
               <div class="price"><span class="yen">&yen;</span>${p.price}</div>
-              ${qty > 0 ? `
+              ${qty > 0 && cartItem ? `
                 <div class="qty-control">
-                  <button class="btn-icon minus" onclick="event.stopPropagation(); changeQty(${p.id}, -1, this)" aria-label="减少数量">
+                  <button class="btn-icon minus" onclick="event.stopPropagation(); changeQty(${cartItem.cartItemId}, -1, this)" aria-label="减少数量">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
                   </button>
                   <span class="qty-num">${qty}</span>
-                  <button class="btn-icon add" onclick="event.stopPropagation(); changeQty(${p.id}, 1, this)" aria-label="增加数量">
+                  <button class="btn-icon add" onclick="event.stopPropagation(); changeQty(${cartItem.cartItemId}, 1, this)" aria-label="增加数量">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                   </button>
                 </div>
@@ -3604,6 +3880,13 @@
     });
 
     updateModalPrice();
+
+    // Set favorite button state
+    const favBtn = document.getElementById('favoriteBtn');
+    const isFav = favorites.includes(product.id);
+    favBtn.classList.toggle('favorited', isFav);
+    const favSvg = favBtn.querySelector('svg');
+    if (favSvg) favSvg.style.fill = isFav ? 'currentColor' : 'none';
 
     const modal = document.getElementById('productModal');
     modal.classList.add('open');
@@ -3674,6 +3957,7 @@
       existing.qty++;
     } else {
       cart.push({
+        cartItemId: ++cartItemIdCounter,
         id: selectedProduct.id,
         name: selectedProduct.name,
         price: totalPrice,
@@ -3684,6 +3968,7 @@
     }
 
     updateCartUI();
+    saveCart();
     closeProductModal();
     showToast('已加入购物车');
 
@@ -3702,6 +3987,7 @@
   // ========================================
   // CART
   // ========================================
+  let cartItemIdCounter = 0;
   function quickAdd(id, btnEl) {
     const product = PRODUCTS.find(p => p.id === id);
     if (!product) return;
@@ -3712,6 +3998,7 @@
       existing.qty++;
     } else {
       cart.push({
+        cartItemId: ++cartItemIdCounter,
         id: id,
         name: product.name,
         price: product.price,
@@ -3722,6 +4009,7 @@
     }
 
     updateCartUI();
+    saveCart();
     showToast('已加入购物车');
 
     // Fly animation
@@ -3741,16 +4029,17 @@
     }
   }
 
-  function changeQty(id, delta, btnEl) {
-    const item = cart.find(c => c.id === id);
+  function changeQty(cartItemId, delta, btnEl) {
+    const item = cart.find(c => c.cartItemId === cartItemId);
     if (!item) return;
 
     item.qty += delta;
     if (item.qty <= 0) {
-      cart = cart.filter(c => c.id !== id || c.qty > 0);
+      cart = cart.filter(c => c.cartItemId !== cartItemId);
     }
 
     updateCartUI();
+    saveCart();
     if (currentPage === 'order') renderProductGrid();
     renderCartDrawer();
   }
@@ -3826,11 +4115,11 @@
           <div class="cart-item-price"><span class="yen">&yen;</span>${item.price}</div>
         </div>
         <div class="qty-control">
-          <button class="btn-icon minus" onclick="changeQty(${item.id}, -1, this)" aria-label="减少 ${item.name} 数量">
+          <button class="btn-icon minus" onclick="changeQty(${item.cartItemId}, -1, this)" aria-label="减少 ${item.name} 数量">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
           <span class="qty-num">${item.qty}</span>
-          <button class="btn-icon add" onclick="changeQty(${item.id}, 1, this)" aria-label="增加 ${item.name} 数量">
+          <button class="btn-icon add" onclick="changeQty(${item.cartItemId}, 1, this)" aria-label="增加 ${item.name} 数量">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </button>
         </div>
@@ -3852,6 +4141,7 @@
       btn.textContent = '清空';
       cart = [];
       updateCartUI();
+      saveCart();
       renderCartDrawer();
       if (currentPage === 'order') renderProductGrid();
       toggleCartDrawer();
@@ -3907,9 +4197,10 @@
 
     // Render price summary
     const subtotal = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-    const deliveryFee = 5;
+    const deliveryFee = selectedPickupMethod === 'delivery' ? 5 : 0;
     const packagingFee = cart.length * 1;
-    const total = subtotal + deliveryFee + packagingFee;
+    const discount = promoDiscount || 0;
+    const total = subtotal + deliveryFee + packagingFee - discount;
 
     const summaryEl = document.getElementById('priceSummary');
     summaryEl.innerHTML = `
@@ -3921,10 +4212,16 @@
         <span>包装费</span>
         <span class="value">&yen;${packagingFee}</span>
       </div>
+      ${deliveryFee > 0 ? `
       <div class="price-row">
         <span>配送费</span>
         <span class="value">&yen;${deliveryFee}</span>
-      </div>
+      </div>` : ''}
+      ${discount > 0 ? `
+      <div class="price-row">
+        <span>优惠减免</span>
+        <span class="value" style="color:var(--heytea-green);">-&yen;${discount}</span>
+      </div>` : ''}
       <div class="price-row total">
         <span>合计</span>
         <span class="value">&yen;${total}</span>
@@ -3941,6 +4238,21 @@
 
     // Reset remark
     document.getElementById('checkoutRemark').value = '';
+
+    // Reset promo code
+    promoDiscount = 0;
+    const promoInput = document.getElementById('promoInput');
+    if (promoInput) promoInput.value = '';
+    const promoResult = document.getElementById('promoResult');
+    if (promoResult) promoResult.style.display = 'none';
+
+    // Reset pickup method
+    selectedPickupMethod = 'pickup';
+    document.querySelectorAll('.pickup-method').forEach(m => {
+      m.classList.toggle('active', m.dataset.method === 'pickup');
+    });
+    const addrEl = document.getElementById('deliveryAddress');
+    if (addrEl) addrEl.style.display = 'none';
   }
 
   function selectPayment(method) {
@@ -3948,6 +4260,103 @@
     document.querySelectorAll('.payment-method').forEach(m => {
       m.classList.toggle('active', m.dataset.method === method);
     });
+  }
+
+  let selectedPickupMethod = 'pickup';
+  let promoDiscount = 0;
+
+  function selectPickupMethod(method) {
+    selectedPickupMethod = method;
+    document.querySelectorAll('.pickup-method').forEach(m => {
+      m.classList.toggle('active', m.dataset.method === method);
+    });
+    const addrEl = document.getElementById('deliveryAddress');
+    if (addrEl) addrEl.style.display = method === 'delivery' ? 'flex' : 'none';
+    renderCheckoutPriceSummary();
+  }
+
+  function renderCheckoutPriceSummary() {
+    if (currentPage !== 'checkout') return;
+    const subtotal = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+    const deliveryFee = selectedPickupMethod === 'delivery' ? 5 : 0;
+    const packagingFee = cart.length * 1;
+    const discount = promoDiscount || 0;
+    const total = subtotal + deliveryFee + packagingFee - discount;
+
+    const summaryEl = document.getElementById('priceSummary');
+    if (!summaryEl) return;
+    summaryEl.innerHTML = `
+      <div class="price-row">
+        <span>商品小计</span>
+        <span class="value">&yen;${subtotal}</span>
+      </div>
+      <div class="price-row">
+        <span>包装费</span>
+        <span class="value">&yen;${packagingFee}</span>
+      </div>
+      ${deliveryFee > 0 ? `
+      <div class="price-row">
+        <span>配送费</span>
+        <span class="value">&yen;${deliveryFee}</span>
+      </div>` : ''}
+      ${discount > 0 ? `
+      <div class="price-row">
+        <span>优惠减免</span>
+        <span class="value" style="color:var(--heytea-green);">-&yen;${discount}</span>
+      </div>` : ''}
+      <div class="price-row total">
+        <span>合计</span>
+        <span class="value">&yen;${total}</span>
+      </div>
+    `;
+    // Update pay button price
+    const payBtn = document.getElementById('payBtn');
+    if (payBtn && !payBtn.disabled) {
+      payBtn.innerHTML = '<span class="yen" style="font-size:14px;font-weight:600;">&yen;</span><span id="payTotalPrice">' + total + '</span> · 立即支付';
+    }
+  }
+
+  function addQuickRemark(text) {
+    const input = document.getElementById('checkoutRemark');
+    const current = input.value.trim();
+    if (current) {
+      if (current.includes(text)) return;
+      input.value = current + '、' + text;
+    } else {
+      input.value = text;
+    }
+  }
+
+  function applyPromoCode() {
+    const code = document.getElementById('promoInput').value.trim().toUpperCase();
+    const resultEl = document.getElementById('promoResult');
+
+    if (!code) {
+      resultEl.style.display = 'block';
+      resultEl.className = 'promo-result error';
+      resultEl.textContent = '请输入优惠码';
+      return;
+    }
+
+    const validCodes = {
+      'HEYTEA10': { discount: 10, label: '满50减10' },
+      'NEWUSER': { discount: 15, label: '新用户立减15元' },
+      'SUMMER': { discount: 8, label: '夏日优惠减8元' },
+    };
+
+    if (validCodes[code]) {
+      promoDiscount = validCodes[code].discount;
+      resultEl.style.display = 'block';
+      resultEl.className = 'promo-result success';
+      resultEl.textContent = `优惠码已使用：${validCodes[code].label}`;
+      // Re-render price summary with discount, but preserve promo state
+      renderCheckoutPriceSummary();
+    } else {
+      resultEl.style.display = 'block';
+      resultEl.className = 'promo-result error';
+      resultEl.textContent = '优惠码无效或已过期';
+      promoDiscount = 0;
+    }
   }
 
   function handlePay() {
@@ -3962,7 +4371,8 @@
 
       const totalQty = cart.reduce((sum, c) => sum + c.qty, 0);
       const totalPrice = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
-      const total = totalPrice + 5 + cart.length * 1;
+      const deliveryFee = selectedPickupMethod === 'delivery' ? 5 : 0;
+      const total = totalPrice + deliveryFee + cart.length * 1 - (promoDiscount || 0);
 
       // Save order
       const order = {
@@ -3976,6 +4386,7 @@
         status: 0 // 0:已下单 1:制作中 2:待取餐 3:已完成
       };
       orderHistory.unshift(order);
+      saveOrderHistory();
 
       document.getElementById('successDesc').textContent = `共 ${totalQty} 杯 · ¥${total} · 预计15分钟内制作完成`;
       document.getElementById('successOverlay').classList.add('show');
@@ -3983,6 +4394,7 @@
       // Clear cart
       cart = [];
       updateCartUI();
+      saveCart();
     }, 1500);
   }
 
@@ -3996,6 +4408,7 @@
   // ORDER TRACKING
   // ========================================
   let trackingTimer = null;
+  let currentTrackingOrder = null;
   const TRACKING_STEPS = [
     { title: '订单已提交', desc: '您的订单已成功提交', icon: '📝' },
     { title: '制作中', desc: '茶饮师正在精心制作', icon: '🍵' },
@@ -4017,6 +4430,11 @@
 
     document.getElementById('trackingOrderId').textContent = `订单号：${order.id}`;
     document.getElementById('pickupCode').textContent = order.pickupCode;
+    document.getElementById('trackingStore').textContent = order.store;
+    document.getElementById('trackingTime').textContent = formatTime(order.createdAt);
+    document.getElementById('trackingTotal').textContent = `¥${order.total}`;
+
+    currentTrackingOrder = order;
 
     const statusTexts = ['已下单', '制作中', '待取餐', '已完成'];
     document.getElementById('trackingStatusText').textContent = statusTexts[order.status];
@@ -4120,6 +4538,34 @@
       renderTrackingPage(order);
       navigateTo('tracking');
     }
+  }
+
+  function reorderFromTracking() {
+    if (!currentTrackingOrder) {
+      navigateTo('order');
+      return;
+    }
+    // Add all items from the order to cart
+    currentTrackingOrder.items.forEach(item => {
+      const existing = cart.find(c => c.id === item.id && c.spec === item.spec);
+      if (existing) {
+        existing.qty += item.qty;
+      } else {
+        cart.push({
+          cartItemId: ++cartItemIdCounter,
+          id: item.id,
+          name: item.name,
+          price: item.price,
+          spec: item.spec,
+          qty: item.qty,
+          img: item.img
+        });
+      }
+    });
+    updateCartUI();
+    saveCart();
+    showToast('已添加到购物车');
+    navigateTo('order');
   }
 
   // ========================================
@@ -4284,11 +4730,11 @@
   ];
 
   const COUPONS = [
-    { id: 1, name: '满50减10', desc: '全场饮品可用', amount: 10, condition: '满50可用', expire: '2026.05.31', used: false },
-    { id: 2, name: '免配送费券', desc: '外卖订单可用', amount: 5, condition: '无门槛', expire: '2026.04.30', used: false },
-    { id: 3, name: '买一赠一券', desc: '指定款饮品可用', amount: 0, condition: '指定款', expire: '2026.05.15', used: false },
-    { id: 4, name: '新品8折券', desc: '新品上市专属折扣', amount: 0, condition: '新品可用', expire: '2026.04.25', used: true },
-    { id: 5, name: '下午茶套餐券', desc: '14:00-17:00可用', amount: 15, condition: '满80可用', expire: '2026.06.01', used: false },
+    { id: 1, name: '满50减10', desc: '全场饮品可用', amount: 10, condition: '满50可用', expire: '2026.08.31', used: false },
+    { id: 2, name: '免配送费券', desc: '外卖订单可用', amount: 5, condition: '无门槛', expire: '2026.07.31', used: false },
+    { id: 3, name: '买一赠一券', desc: '指定款饮品可用', amount: 0, condition: '指定款', expire: '2026.07.15', used: false },
+    { id: 4, name: '新品8折券', desc: '新品上市专属折扣', amount: 0, condition: '新品可用', expire: '2026.06.25', used: true },
+    { id: 5, name: '下午茶套餐券', desc: '14:00-17:00可用', amount: 15, condition: '满80可用', expire: '2026.09.01', used: false },
   ];
 
   const POINTS_ITEMS = [
@@ -4405,6 +4851,11 @@
   // INIT
   // ========================================
   function init() {
+    // Load saved data
+    loadCart();
+    loadOrderHistory();
+    updateCartUI();
+
     initBanner();
     renderHotProducts();
     renderNewArrivals();
@@ -4415,9 +4866,10 @@
     document.addEventListener('click', function(e) {
       const btn = e.target.closest('button, .order-type-card, .hot-product-card, .product-card, .tab-item, .payment-method');
       if (btn) {
-        if (getComputedStyle(btn).position === 'static') {
-          btn.style.position = 'relative';
-        }
+        const computed = getComputedStyle(btn);
+        const wasStatic = computed.position === 'static';
+        const hadOverflow = btn.style.overflow;
+        if (wasStatic) btn.style.position = 'relative';
         btn.style.overflow = 'hidden';
         const rect = btn.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -4429,7 +4881,11 @@
         ripple.style.left = x + 'px';
         ripple.style.top = y + 'px';
         btn.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
+        setTimeout(() => {
+          ripple.remove();
+          if (hadOverflow) btn.style.overflow = hadOverflow;
+          else btn.style.removeProperty('overflow');
+        }, 600);
       }
     }, true);
 
